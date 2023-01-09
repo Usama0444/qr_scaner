@@ -199,15 +199,6 @@ class _AddAssetsState extends State<AddAssets> {
                                 btnTxt: 'Show All',
                               ),
                             ),
-                            GestureDetector(
-                              onTap: () {},
-                              child: MyButton(
-                                btnWidth: 100.w,
-                                btnHeight: 60.h,
-                                btnColor: Colors.grey[500],
-                                btnTxt: 'Excel Import',
-                              ),
-                            ),
                           ],
                         ),
                       ),

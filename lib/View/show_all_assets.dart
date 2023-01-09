@@ -12,9 +12,19 @@ import 'package:qr_scaner/Model/assets_model.dart';
 import 'package:qr_scaner/View/add_assets.dart';
 import 'package:qr_scaner/utils/reusabale.dart';
 
-class ShowAllAssets extends StatelessWidget {
+class ShowAllAssets extends StatefulWidget {
   ShowAllAssets({super.key});
+
+  @override
+  State<ShowAllAssets> createState() => _ShowAllAssetsState();
+}
+
+class _ShowAllAssetsState extends State<ShowAllAssets> {
   AddAssetsController assetss = Get.find<AddAssetsController>();
+
+  List<AssetsModel> assets = [];
+  List<List<String>> exportAndShare = [];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -26,6 +36,15 @@ class ShowAllAssets extends StatelessWidget {
             color: Colors.grey[600],
           ),
           elevation: 0.0,
+        ),
+        floatingActionButton: GestureDetector(
+          onTap: () {},
+          child: MyButton(
+            btnWidth: 100.w,
+            btnHeight: 60.h,
+            btnColor: Colors.grey[500],
+            btnTxt: 'Excel Import',
+          ),
         ),
         body: StreamBuilder<QuerySnapshot>(
             stream: assetss.getAll(),
@@ -43,7 +62,6 @@ class ShowAllAssets extends StatelessWidget {
                 );
               } else {
                 var docs = snapshot.data?.docs;
-                List<AssetsModel> assets = [];
                 var ids = [];
                 for (int i = 0; i < docs!.length; i++) {
                   assets.add(AssetsModel(
@@ -63,6 +81,7 @@ class ShowAllAssets extends StatelessWidget {
                   ));
                   ids.add(docs[i]['id']);
                 }
+                setState(() {});
                 return ListView.builder(
                   itemCount: assets.length,
                   itemBuilder: (context, index) {
@@ -157,7 +176,6 @@ class ShowAllAssets extends StatelessWidget {
                                             assetss.city = assets[index].city;
                                             assetss.branch = assets[index].branch;
                                             assetss.category = assets[index].category;
-
                                             assetss.update();
                                             Get.to(AddAssets());
                                           },
