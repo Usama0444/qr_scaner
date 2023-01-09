@@ -14,6 +14,7 @@ import 'package:qr_scaner/View/add_assets.dart';
 import 'package:qr_scaner/utils/reusabale.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
+
 class ShowAllAssets extends StatefulWidget {
   ShowAllAssets({super.key});
 
@@ -27,29 +28,43 @@ class _ShowAllAssetsState extends State<ShowAllAssets> {
   List<AssetsModel> assets = [];
   List<List<String>> exportAndShare = [];
 
-   //___________________________UPDATE LIST
-   updateList(){
-     for(int i=0 ; i<assets.length ; i++) {
-      exportAndShare.add(
-        [
-          assets[i].city.toString(),
-          assets[i].category.toString(),
-          assets[i].branch.toString(),
-          assets[i].floor.toString(),
-          assets[i].room.toString(),
-          assets[i].ref.toString(),
-          assets[i].subCategory.toString(),
-          assets[i].erpRef.toString(),
-          assets[i].holdername.toString(),
-          assets[i].serNo.toString(),
-          assets[i].assetsDes.toString(),
-         // assets[i].assetsImg.toString(),
-          assets[i].assetBarcode.toString(),
-        ]
-      );
-     }
-   }
-   //________________________SAVE EXCEL SHEET
+  //___________________________UPDATE LIST
+  updateList() {
+    exportAndShare.add([
+      'CITY',
+      'CATEGORY',
+      'BRANCH',
+      'FLOOR',
+      'ROOM',
+      'REFERENCE',
+      'SUBCATEGORY',
+      'ERPREF',
+      'HOLDERNAME',
+      'SER NO',
+      'ASS DES',
+      // assets[i].assetsImg.toString(),
+      'ASSET BARCODE',
+    ]);
+    for (int i = 0; i < assets.length; i++) {
+      exportAndShare.add([
+        assets[i].city.toString(),
+        assets[i].category.toString(),
+        assets[i].branch.toString(),
+        assets[i].floor.toString(),
+        assets[i].room.toString(),
+        assets[i].ref.toString(),
+        assets[i].subCategory.toString(),
+        assets[i].erpRef.toString(),
+        assets[i].holdername.toString(),
+        assets[i].serNo.toString(),
+        assets[i].assetsDes.toString(),
+        // assets[i].assetsImg.toString(),
+        assets[i].assetBarcode.toString(),
+      ]);
+    }
+  }
+
+  //________________________SAVE EXCEL SHEET
   saveList() async {
     String csvData = ListToCsvConverter().convert(exportAndShare);
     final String directory = (await getApplicationSupportDirectory()).path;
@@ -60,10 +75,12 @@ class _ShowAllAssetsState extends State<ShowAllAssets> {
     await file.writeAsString(csvData);
     shareFile(file);
   }
+
   //____________________________SHARE FILE
-  shareFile(File file){
+  shareFile(File file) {
     Share.shareFiles([file.path]);
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -139,21 +156,24 @@ class _ShowAllAssetsState extends State<ShowAllAssets> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     CustomTxt(
-                                      txt: 'Holder Name : ${assets[index].holdername}',
+                                      txt:
+                                          'Holder Name : ${assets[index].holdername}',
                                       txt_style: TextStyle(
                                         fontSize: 16.sp,
                                         color: Colors.black,
                                       ),
                                     ),
                                     CustomTxt(
-                                      txt: 'Barcode : ${assets[index].assetBarcode}',
+                                      txt:
+                                          'Barcode : ${assets[index].assetBarcode}',
                                       txt_style: TextStyle(
                                         fontSize: 16.sp,
                                         color: Colors.black,
                                       ),
                                     ),
                                     CustomTxt(
-                                      txt: 'Description : ${assets[index].assetsDes}',
+                                      txt:
+                                          'Description : ${assets[index].assetsDes}',
                                       txt_style: TextStyle(
                                         fontSize: 16.sp,
                                         color: Colors.black,
@@ -181,7 +201,8 @@ class _ShowAllAssetsState extends State<ShowAllAssets> {
                                       ),
                                     ),
                                     CustomTxt(
-                                      txt: 'Category : ${assets[index].category}',
+                                      txt:
+                                          'Category : ${assets[index].category}',
                                       txt_style: TextStyle(
                                         fontSize: 16.sp,
                                         color: Colors.black,
@@ -195,28 +216,41 @@ class _ShowAllAssetsState extends State<ShowAllAssets> {
                                         ? SizedBox(
                                             width: 200.w,
                                             height: 100.h,
-                                            child: Image.memory(base64.decode(assets[index].assetsImg!)),
+                                            child: Image.memory(base64.decode(
+                                                assets[index].assetsImg!)),
                                           )
                                         : Text(''),
                                     Row(
                                       children: [
                                         GestureDetector(
                                           onTap: () {
-                                            assetss.assetBarcode.text = assets[index].assetBarcode!;
-                                            assetss.assetDes.text = assets[index].assetsDes!;
-                                            assetss.assetsImage = assets[index].assetsImg!;
-                                            assetss.floor.text = assets[index].floor!;
-                                            assetss.room.text = assets[index].room!;
-                                            assetss.subCategory.text = assets[index].subCategory!;
-                                            assetss.ref.text = assets[index].ref!;
-                                            assetss.repRef.text = assets[index].erpRef!;
-                                            assetss.holderName.text = assets[index].holdername!;
-                                            assetss.serNo.text = assets[index].serNo!;
+                                            assetss.assetBarcode.text =
+                                                assets[index].assetBarcode!;
+                                            assetss.assetDes.text =
+                                                assets[index].assetsDes!;
+                                            assetss.assetsImage =
+                                                assets[index].assetsImg!;
+                                            assetss.floor.text =
+                                                assets[index].floor!;
+                                            assetss.room.text =
+                                                assets[index].room!;
+                                            assetss.subCategory.text =
+                                                assets[index].subCategory!;
+                                            assetss.ref.text =
+                                                assets[index].ref!;
+                                            assetss.repRef.text =
+                                                assets[index].erpRef!;
+                                            assetss.holderName.text =
+                                                assets[index].holdername!;
+                                            assetss.serNo.text =
+                                                assets[index].serNo!;
                                             assetss.id = ids[index];
                                             assetss.isUpdate = true;
                                             assetss.city = assets[index].city;
-                                            assetss.branch = assets[index].branch;
-                                            assetss.category = assets[index].category;
+                                            assetss.branch =
+                                                assets[index].branch;
+                                            assetss.category =
+                                                assets[index].category;
                                             assetss.update();
                                             Get.to(AddAssets());
                                           },
