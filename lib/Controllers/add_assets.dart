@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:qr_scaner/utils/toast.dart';
 
+import '../Model/assets_model.dart';
+
 class AddAssetsController extends GetxController {
   TextEditingController floor = TextEditingController();
   TextEditingController room = TextEditingController();
@@ -22,6 +24,8 @@ class AddAssetsController extends GetxController {
   String? city;
   String? branch;
   String? category;
+  List<AssetsModel> assets = [];
+
   List<String> cityList = [
     'ISB',
     'RWP',

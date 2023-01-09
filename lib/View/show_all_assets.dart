@@ -1,6 +1,7 @@
 import 'dart:convert';
-
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -11,7 +12,8 @@ import 'package:qr_scaner/Model/assets_model.dart';
 import 'package:qr_scaner/Model/assets_model.dart';
 import 'package:qr_scaner/View/add_assets.dart';
 import 'package:qr_scaner/utils/reusabale.dart';
-
+import 'package:share_plus/share_plus.dart';
+import 'package:path_provider/path_provider.dart';
 class ShowAllAssets extends StatefulWidget {
   ShowAllAssets({super.key});
 
@@ -25,6 +27,43 @@ class _ShowAllAssetsState extends State<ShowAllAssets> {
   List<AssetsModel> assets = [];
   List<List<String>> exportAndShare = [];
 
+   //___________________________UPDATE LIST
+   updateList(){
+     for(int i=0 ; i<assets.length ; i++) {
+      exportAndShare.add(
+        [
+          assets[i].city.toString(),
+          assets[i].category.toString(),
+          assets[i].branch.toString(),
+          assets[i].floor.toString(),
+          assets[i].room.toString(),
+          assets[i].ref.toString(),
+          assets[i].subCategory.toString(),
+          assets[i].erpRef.toString(),
+          assets[i].holdername.toString(),
+          assets[i].serNo.toString(),
+          assets[i].assetsDes.toString(),
+         // assets[i].assetsImg.toString(),
+          assets[i].assetBarcode.toString(),
+        ]
+      );
+     }
+   }
+   //________________________SAVE EXCEL SHEET
+  saveList() async {
+    String csvData = ListToCsvConverter().convert(exportAndShare);
+    final String directory = (await getApplicationSupportDirectory()).path;
+    print(directory);
+    final path = "$directory/csv-${DateTime.now()}.csv";
+    print('File Saved in Given Path=$path');
+    final File file = File(path);
+    await file.writeAsString(csvData);
+    shareFile(file);
+  }
+  //____________________________SHARE FILE
+  shareFile(File file){
+    Share.shareFiles([file.path]);
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -38,7 +77,10 @@ class _ShowAllAssetsState extends State<ShowAllAssets> {
           elevation: 0.0,
         ),
         floatingActionButton: GestureDetector(
-          onTap: () {},
+          onTap: () async {
+            await updateList();
+            await saveList();
+          },
           child: MyButton(
             btnWidth: 100.w,
             btnHeight: 60.h,
@@ -81,7 +123,6 @@ class _ShowAllAssetsState extends State<ShowAllAssets> {
                   ));
                   ids.add(docs[i]['id']);
                 }
-                setState(() {});
                 return ListView.builder(
                   itemCount: assets.length,
                   itemBuilder: (context, index) {

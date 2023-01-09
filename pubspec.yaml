@@ -43,6 +43,8 @@ dependencies:
   cloud_firestore: ^4.3.1
   fluttertoast: ^8.0.9
   image_picker: ^0.8.6
+  share_plus: ^6.3.0
+  csv: ^5.0.1
 
 
 dev_dependencies:

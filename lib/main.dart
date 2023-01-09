@@ -8,6 +8,7 @@ import 'package:qr_scaner/View/add_user.dart';
 import 'package:qr_scaner/View/create_branch.dart';
 import 'package:qr_scaner/View/home_page.dart';
 import 'package:qr_scaner/View/login.dart';
+import 'package:qr_scaner/View/test_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            home: Login(),
+            home:  Login(),
           );
         });
   }
