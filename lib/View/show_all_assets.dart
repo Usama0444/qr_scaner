@@ -62,6 +62,7 @@ class _ShowAllAssetsState extends State<ShowAllAssets> {
         assets[i].assetBarcode.toString(),
       ]);
     }
+    //commit
   }
 
   //________________________SAVE EXCEL SHEET
