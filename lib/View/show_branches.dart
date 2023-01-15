@@ -75,13 +75,14 @@ class ShowBranches extends StatelessWidget {
                                         controller.update();
                                         Get.to(CreateBrach());
                                       },
-                                      child: const Icon(
+                                      child: Icon(
                                         Icons.edit,
                                         color: Colors.blue,
+                                        size: 40.sp,
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 10,
+                                      width: 40.w,
                                     ),
                                     GestureDetector(
                                       onTap: () {
@@ -90,6 +91,7 @@ class ShowBranches extends StatelessWidget {
                                       child: Icon(
                                         Icons.delete,
                                         color: Colors.red,
+                                        size: 40.sp,
                                       ),
                                     )
                                   ],

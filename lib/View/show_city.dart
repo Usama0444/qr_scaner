@@ -76,13 +76,14 @@ class ShowCity extends StatelessWidget {
                                         controller.update();
                                         Get.to(CreateCity());
                                       },
-                                      child: const Icon(
+                                      child: Icon(
                                         Icons.edit,
                                         color: Colors.blue,
+                                        size: 40.sp,
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 10,
+                                      width: 40.w,
                                     ),
                                     GestureDetector(
                                       onTap: () {
@@ -91,6 +92,7 @@ class ShowCity extends StatelessWidget {
                                       child: Icon(
                                         Icons.delete,
                                         color: Colors.red,
+                                        size: 40.sp,
                                       ),
                                     )
                                   ],

@@ -4,9 +4,12 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:qr_scaner/Controllers/add_assets.dart';
+import 'package:qr_scaner/Controllers/login_controller.dart';
 import 'package:qr_scaner/View/show_all_assets.dart';
 
 import '../utils/reusabale.dart';
+import '../utils/toast.dart';
+import 'login.dart';
 
 class AddAssets extends StatefulWidget {
   AddAssets({super.key});
@@ -17,11 +20,12 @@ class AddAssets extends StatefulWidget {
 
 class _AddAssetsState extends State<AddAssets> {
   AddAssetsController controller = Get.find<AddAssetsController>();
+  LoginController loginController = Get.find<LoginController>();
+
   var formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controller.fillDropDownList();
   }
@@ -199,6 +203,19 @@ class _AddAssetsState extends State<AddAssets> {
                                 btnTxt: 'Show All',
                               ),
                             ),
+                            loginController.isAdminLogin == false
+                                ? GestureDetector(
+                                    onTap: () {
+                                      Get.offAll(Login());
+                                    },
+                                    child: MyButton(
+                                      btnWidth: 100.w,
+                                      btnHeight: 60.h,
+                                      btnColor: Colors.grey[500],
+                                      btnTxt: 'Logout',
+                                    ),
+                                  )
+                                : SizedBox(),
                           ],
                         ),
                       ),

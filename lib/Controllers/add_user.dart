@@ -13,6 +13,7 @@ class CreateUserController extends GetxController {
   bool isUserUpdate = false;
   var id;
   var userCollectionRef = FirebaseFirestore.instance.collection('users');
+
   addUser() async {
     try {
       if (await checkRecordExisting()) {

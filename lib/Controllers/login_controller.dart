@@ -11,6 +11,7 @@ class LoginController extends GetxController {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
   var userCollectionRef = FirebaseFirestore.instance.collection('users');
+  bool isAdminLogin = false;
   userLogin() async {
     try {
       var isMatch = await userCollectionRef
@@ -26,8 +27,10 @@ class LoginController extends GetxController {
       if (isMatch.docs.isNotEmpty) {
         toast('Login Successfully!');
         if (username.text == 'admin') {
+          isAdminLogin = true;
           Get.offAll(HomePage());
         } else {
+          isAdminLogin = false;
           Get.offAll(AddAssets());
         }
         clearAllFields();

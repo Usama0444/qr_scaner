@@ -12,6 +12,7 @@ import 'package:qr_scaner/Model/assets_model.dart';
 import 'package:qr_scaner/Model/assets_model.dart';
 import 'package:qr_scaner/View/add_assets.dart';
 import 'package:qr_scaner/utils/reusabale.dart';
+import 'package:qr_scaner/utils/toast.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -36,7 +37,7 @@ class _ShowAllAssetsState extends State<ShowAllAssets> {
       'BRANCH',
       'FLOOR',
       'ROOM',
-      'REFERENCE',
+      'REF',
       'SUBCATEGORY',
       'ERPREF',
       'HOLDERNAME',
@@ -72,6 +73,7 @@ class _ShowAllAssetsState extends State<ShowAllAssets> {
     print(directory);
     final path = "$directory/csv-${DateTime.now()}.csv";
     print('File Saved in Given Path=$path');
+    toast('File Saved at Path=$path');
     final File file = File(path);
     await file.writeAsString(csvData);
     shareFile(file);
@@ -153,128 +155,127 @@ class _ShowAllAssetsState extends State<ShowAllAssets> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CustomTxt(
-                                      txt:
-                                          'Holder Name : ${assets[index].holdername}',
-                                      txt_style: TextStyle(
-                                        fontSize: 16.sp,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    CustomTxt(
-                                      txt:
-                                          'Barcode : ${assets[index].assetBarcode}',
-                                      txt_style: TextStyle(
-                                        fontSize: 16.sp,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    CustomTxt(
-                                      txt:
-                                          'Description : ${assets[index].assetsDes}',
-                                      txt_style: TextStyle(
-                                        fontSize: 16.sp,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    CustomTxt(
-                                      txt: 'Floor : ${assets[index].floor}',
-                                      txt_style: TextStyle(
-                                        fontSize: 16.sp,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    CustomTxt(
-                                      txt: 'Branch : ${assets[index].branch}',
-                                      txt_style: TextStyle(
-                                        fontSize: 16.sp,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    CustomTxt(
-                                      txt: 'City : ${assets[index].city}',
-                                      txt_style: TextStyle(
-                                        fontSize: 16.sp,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    CustomTxt(
-                                      txt:
-                                          'Category : ${assets[index].category}',
-                                      txt_style: TextStyle(
-                                        fontSize: 16.sp,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
+                                assets[index].assetsImg != null
+                                    ? Expanded(
+                                        flex: 1,
+                                        child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(20.h),
+                                            child: Image.memory(
+                                              base64.decode(assets[index].assetsImg!),
+                                              fit: BoxFit.cover,
+                                              width: 80.w,
+                                              height: 120.h,
+                                            )),
+                                      )
+                                    : SizedBox(),
+                                SizedBox(
+                                  width: 30.w,
                                 ),
-                                Column(
-                                  children: [
-                                    assets[index].assetsImg != null
-                                        ? SizedBox(
-                                            width: 200.w,
-                                            height: 100.h,
-                                            child: Image.memory(base64.decode(
-                                                assets[index].assetsImg!)),
-                                          )
-                                        : Text(''),
-                                    Row(
+                                Expanded(
+                                  flex: 3,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      CustomTxt(
+                                        txt: 'Holder Name : ${assets[index].holdername}',
+                                        txt_style: TextStyle(
+                                          fontSize: 16.sp,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      CustomTxt(
+                                        txt: 'Barcode : ${assets[index].assetBarcode}',
+                                        txt_style: TextStyle(
+                                          fontSize: 16.sp,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      CustomTxt(
+                                        txt: 'Description : ${assets[index].assetsDes}',
+                                        txt_style: TextStyle(
+                                          fontSize: 16.sp,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      CustomTxt(
+                                        txt: 'Floor : ${assets[index].floor}',
+                                        txt_style: TextStyle(
+                                          fontSize: 16.sp,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      CustomTxt(
+                                        txt: 'Branch : ${assets[index].branch}',
+                                        txt_style: TextStyle(
+                                          fontSize: 16.sp,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      CustomTxt(
+                                        txt: 'City : ${assets[index].city}',
+                                        txt_style: TextStyle(
+                                          fontSize: 16.sp,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      CustomTxt(
+                                        txt: 'Category : ${assets[index].category}',
+                                        txt_style: TextStyle(
+                                          fontSize: 16.sp,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 20.h),
+                                    child: Column(
                                       children: [
                                         GestureDetector(
                                           onTap: () {
-                                            assetss.assetBarcode.text =
-                                                assets[index].assetBarcode!;
-                                            assetss.assetDes.text =
-                                                assets[index].assetsDes!;
-                                            assetss.assetsImage =
-                                                assets[index].assetsImg!;
-                                            assetss.floor.text =
-                                                assets[index].floor!;
-                                            assetss.room.text =
-                                                assets[index].room!;
-                                            assetss.subCategory.text =
-                                                assets[index].subCategory!;
-                                            assetss.ref.text =
-                                                assets[index].ref!;
-                                            assetss.repRef.text =
-                                                assets[index].erpRef!;
-                                            assetss.holderName.text =
-                                                assets[index].holdername!;
-                                            assetss.serNo.text =
-                                                assets[index].serNo!;
+                                            assetss.assetBarcode.text = assets[index].assetBarcode!;
+                                            assetss.assetDes.text = assets[index].assetsDes!;
+                                            assetss.assetsImage = assets[index].assetsImg!;
+                                            assetss.floor.text = assets[index].floor!;
+                                            assetss.room.text = assets[index].room!;
+                                            assetss.subCategory.text = assets[index].subCategory!;
+                                            assetss.ref.text = assets[index].ref!;
+                                            assetss.repRef.text = assets[index].erpRef!;
+                                            assetss.holderName.text = assets[index].holdername!;
+                                            assetss.serNo.text = assets[index].serNo!;
                                             assetss.id = ids[index];
                                             assetss.isUpdate = true;
                                             assetss.city = assets[index].city;
-                                            assetss.branch =
-                                                assets[index].branch;
-                                            assetss.category =
-                                                assets[index].category;
+                                            assetss.branch = assets[index].branch;
+                                            assetss.category = assets[index].category;
                                             assetss.update();
                                             Get.to(AddAssets());
                                           },
-                                          child: const Icon(
+                                          child: Icon(
                                             Icons.edit,
                                             color: Colors.blue,
+                                            size: 40.sp,
                                           ),
                                         ),
-                                        const SizedBox(
-                                          width: 10,
+                                        SizedBox(
+                                          height: 40.h,
                                         ),
                                         GestureDetector(
                                           onTap: () {
                                             assetss.delete(ids[index]);
                                           },
-                                          child: const Icon(
+                                          child: Icon(
                                             Icons.delete,
                                             color: Colors.red,
+                                            size: 40.sp,
                                           ),
                                         )
                                       ],
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ],
                             ),

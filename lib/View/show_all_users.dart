@@ -64,12 +64,23 @@ class ShowAllUsers extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                CustomTxt(
-                                  txt: user[index].username,
-                                  txt_style: TextStyle(
-                                    fontSize: 16.sp,
-                                    color: Colors.black,
-                                  ),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.person,
+                                      size: 20,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    CustomTxt(
+                                      txt: user[index].username,
+                                      txt_style: TextStyle(
+                                        fontSize: 16.sp,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 Row(
                                   children: [
@@ -83,21 +94,23 @@ class ShowAllUsers extends StatelessWidget {
                                         users.update();
                                         Get.to(AddUser());
                                       },
-                                      child: const Icon(
+                                      child: Icon(
                                         Icons.edit,
                                         color: Colors.blue,
+                                        size: 40.sp,
                                       ),
                                     ),
-                                    const SizedBox(
-                                      width: 10,
+                                    SizedBox(
+                                      width: 50.w,
                                     ),
                                     GestureDetector(
                                       onTap: () {
                                         users.delete(ids[index]);
                                       },
-                                      child: const Icon(
+                                      child: Icon(
                                         Icons.delete,
                                         color: Colors.red,
+                                        size: 40.sp,
                                       ),
                                     )
                                   ],

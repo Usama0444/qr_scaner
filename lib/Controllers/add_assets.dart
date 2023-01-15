@@ -167,4 +167,5 @@ class AddAssetsController extends GetxController {
     assetsImage = base64.encode(bytes);
     update();
   }
+
 }
