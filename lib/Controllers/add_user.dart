@@ -68,8 +68,8 @@ class CreateUserController extends GetxController {
     update();
   }
 
-  delete(id) async {
-    await userCollectionRef.doc(id).delete();
+  delete(uid) async {
+    await userCollectionRef.doc(uid).delete();
     toast('user deleted');
   }
 }

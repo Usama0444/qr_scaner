@@ -105,6 +105,7 @@ class ShowAllUsers extends StatelessWidget {
                                     ),
                                     GestureDetector(
                                       onTap: () {
+                                        print('press');
                                         users.delete(ids[index]);
                                       },
                                       child: Icon(

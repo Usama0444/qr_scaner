@@ -125,6 +125,7 @@ class _ShowAllAssetsState extends State<ShowAllAssets> {
               } else {
                 var docs = snapshot.data?.docs;
                 var ids = [];
+                assets.clear();
                 for (int i = 0; i < docs!.length; i++) {
                   assets.add(AssetsModel(
                     city: docs[i]['city'],
