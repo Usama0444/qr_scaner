@@ -16,22 +16,16 @@ class AddUser extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(
-            color: Colors.grey[600],
-          ),
-          elevation: 0.0,
-        ),
         body: Form(
           key: formKey,
-          child: ListView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(
                 child: MyTextField(
                   controller: controller.username,
-                  form_Height: 80.h,
-                  form_width: 350.w,
+                  form_Height: 90.h,
+                  form_width: 500.w,
                   font_size: 16.sp,
                   label_color: Colors.grey[600],
                   lable_Txt: 'Enter username',
@@ -44,8 +38,8 @@ class AddUser extends StatelessWidget {
               Center(
                 child: MyTextField(
                   controller: controller.password,
-                  form_Height: 80.h,
-                  form_width: 350.w,
+                  form_Height: 90.h,
+                  form_width: 500.w,
                   font_size: 16.sp,
                   label_color: Colors.grey[600],
                   lable_Txt: 'Password',
@@ -58,8 +52,8 @@ class AddUser extends StatelessWidget {
               Center(
                 child: MyTextField(
                   controller: controller.confirm_password,
-                  form_Height: 80.h,
-                  form_width: 350.w,
+                  form_Height: 90.h,
+                  form_width: 500.w,
                   font_size: 16.sp,
                   label_color: Colors.grey[600],
                   lable_Txt: 'Confirm password',
@@ -71,11 +65,11 @@ class AddUser extends StatelessWidget {
               ),
               Center(
                 child: SizedBox(
-                  width: 350.w,
+                  width: 500.w,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
                           Get.to(ShowAllUsers());
                         },
@@ -87,7 +81,7 @@ class AddUser extends StatelessWidget {
                         ),
                       ),
                       GetBuilder<CreateUserController>(builder: (controller) {
-                        return GestureDetector(
+                        return InkWell(
                           onTap: () {
                             if (formKey.currentState!.validate()) {
                               if (controller.isUserUpdate) {

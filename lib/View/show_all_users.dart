@@ -84,7 +84,7 @@ class ShowAllUsers extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    GestureDetector(
+                                    InkWell(
                                       onTap: () {
                                         users.username.text = user[index].username!;
                                         users.password.text = user[index].password!;
@@ -103,7 +103,7 @@ class ShowAllUsers extends StatelessWidget {
                                     SizedBox(
                                       width: 50.w,
                                     ),
-                                    GestureDetector(
+                                    InkWell(
                                       onTap: () {
                                         print('press');
                                         users.delete(ids[index]);

@@ -69,7 +69,7 @@ class ShowCategory extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    GestureDetector(
+                                    InkWell(
                                       onTap: () {
                                         controller.name.text = data_list[index];
                                         controller.isUpdate = true;
@@ -86,7 +86,7 @@ class ShowCategory extends StatelessWidget {
                                     SizedBox(
                                       width: 40.w,
                                     ),
-                                    GestureDetector(
+                                    InkWell(
                                       onTap: () {
                                         controller.delete(ids[index]);
                                       },

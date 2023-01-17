@@ -16,16 +16,10 @@ class CreateCity extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(
-            color: Colors.grey[600],
-          ),
-          elevation: 0.0,
-        ),
         body: Form(
           key: formKey,
-          child: ListView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(
                 child: MyTextField(
@@ -46,7 +40,7 @@ class CreateCity extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Get.to(ShowCity());
                       },
@@ -58,7 +52,7 @@ class CreateCity extends StatelessWidget {
                       ),
                     ),
                     GetBuilder<AddCityController>(builder: (controller) {
-                      return GestureDetector(
+                      return InkWell(
                         onTap: () {
                           if (formKey.currentState!.validate()) {
                             controller.isUpdate ? controller.edit() : controller.create();

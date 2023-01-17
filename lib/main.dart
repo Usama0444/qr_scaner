@@ -12,7 +12,14 @@ import 'package:qr_scaner/View/test_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyAcTithY77GQikyMOwsEGK53_pqBHjxu9w",
+      appId: "1:706265455976:web:e005e9ad5041217b23cadd",
+      messagingSenderId: "706265455976",
+      projectId: "scanner-82cd8",
+    ),
+  );
   ControllerBindings().dependencies();
   runApp(const MyApp());
 }
@@ -23,13 +30,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(428, 926),
+        designSize: const Size(1920, 1080),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            home: Login(),
+            home: HomePage(),
           );
         });
   }

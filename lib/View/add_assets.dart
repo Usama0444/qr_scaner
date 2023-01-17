@@ -43,13 +43,6 @@ class _AddAssetsState extends State<AddAssets> {
                   key: formKey,
                   child: Column(
                     children: [
-                      AppBar(
-                        backgroundColor: Colors.transparent,
-                        iconTheme: IconThemeData(
-                          color: Colors.grey[600],
-                        ),
-                        elevation: 0.0,
-                      ),
                       Center(child: MyDropDown(controller: controller, validateTxt: 'City')),
                       MyDropDown(controller: controller, validateTxt: 'Branch'),
                       SizedBox(
@@ -134,7 +127,7 @@ class _AddAssetsState extends State<AddAssets> {
                         validator_txt: 'Please enter assets description',
                       ),
                       GetBuilder<AddAssetsController>(builder: (controller) {
-                        return GestureDetector(
+                        return InkWell(
                           onTap: () {
                             controller.takeAssetImage();
                           },
@@ -178,7 +171,7 @@ class _AddAssetsState extends State<AddAssets> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             GetBuilder<AddAssetsController>(builder: (controller) {
-                              return GestureDetector(
+                              return InkWell(
                                 onTap: () {
                                   if (formKey.currentState!.validate()) {
                                     controller.isUpdate ? controller.edit() : controller.create();
@@ -192,7 +185,7 @@ class _AddAssetsState extends State<AddAssets> {
                                 ),
                               );
                             }),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Get.to(ShowAllAssets());
                               },
@@ -204,7 +197,7 @@ class _AddAssetsState extends State<AddAssets> {
                               ),
                             ),
                             loginController.isAdminLogin == false
-                                ? GestureDetector(
+                                ? InkWell(
                                     onTap: () {
                                       Get.offAll(Login());
                                     },

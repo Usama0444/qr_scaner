@@ -48,7 +48,7 @@ class _MyTextFieldState extends State<MyTextField> {
               hintText: widget.lable_Txt,
               suffixIcon: widget.lable_Txt == 'Password' || widget.lable_Txt == 'Confirm password'
                   ? !obs
-                      ? GestureDetector(
+                      ? InkWell(
                           onTap: () {
                             setState(() {
                               if (obs) {
@@ -59,7 +59,7 @@ class _MyTextFieldState extends State<MyTextField> {
                             });
                           },
                           child: const Icon(Icons.visibility_off))
-                      : GestureDetector(
+                      : InkWell(
                           onTap: () {
                             setState(() {
                               if (obs) {

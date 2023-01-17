@@ -20,29 +20,14 @@ class Login extends StatelessWidget {
         backgroundColor: Colors.white,
         body: Form(
           key: formKey,
-          child: ListView(
-            padding: EdgeInsets.symmetric(horizontal: 10.w),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                width: 400.w,
-                height: 400.h,
-                margin: EdgeInsets.only(top: 10.h, bottom: 30.h),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    'assets/hala.jpg',
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
               Center(
                 child: MyTextField(
                   controller: controller.username,
                   form_Height: 80.h,
-                  form_width: 350.w,
+                  form_width: 500.w,
                   font_size: 16.sp,
                   label_color: Colors.grey[600],
                   lable_Txt: 'Enter username',
@@ -56,7 +41,7 @@ class Login extends StatelessWidget {
                 child: MyTextField(
                   controller: controller.password,
                   form_Height: 80.h,
-                  form_width: 350.w,
+                  form_width: 500.w,
                   font_size: 16.sp,
                   label_color: Colors.grey[600],
                   lable_Txt: 'Password',
@@ -67,7 +52,7 @@ class Login extends StatelessWidget {
                 height: 30,
               ),
               Center(
-                child: GestureDetector(
+                child: InkWell(
                   onTap: () {
                     if (formKey.currentState!.validate()) {
                       controller.userLogin();

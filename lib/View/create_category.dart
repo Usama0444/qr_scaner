@@ -16,16 +16,10 @@ class CreateCategory extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(
-            color: Colors.grey[600],
-          ),
-          elevation: 0.0,
-        ),
         body: Form(
           key: formKey,
-          child: ListView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(
                 child: MyTextField(
@@ -47,7 +41,7 @@ class CreateCategory extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
                           Get.to(ShowCategory());
                         },
@@ -59,7 +53,7 @@ class CreateCategory extends StatelessWidget {
                         ),
                       ),
                       GetBuilder<AddCategoryController>(builder: (controller) {
-                        return GestureDetector(
+                        return InkWell(
                           onTap: () {
                             if (formKey.currentState!.validate()) {
                               controller.isUpdate ? controller.edit() : controller.create();
