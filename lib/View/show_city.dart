@@ -46,7 +46,11 @@ class ShowCity extends StatelessWidget {
                   data_list.add(docs[i]['name']);
                   ids.add(docs[i]['id']);
                 }
-                return ListView.builder(
+                return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height / 4),
+                  ),
                   itemCount: data_list.length,
                   itemBuilder: (context, index) {
                     return SizedBox(
@@ -68,7 +72,7 @@ class ShowCity extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    InkWell(
+                                    GestureDetector(
                                       onTap: () {
                                         controller.name.text = data_list[index];
                                         controller.isUpdate = true;
@@ -85,7 +89,7 @@ class ShowCity extends StatelessWidget {
                                     SizedBox(
                                       width: 40.w,
                                     ),
-                                    InkWell(
+                                    GestureDetector(
                                       onTap: () {
                                         controller.delete(ids[index]);
                                       },

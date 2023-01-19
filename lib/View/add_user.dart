@@ -69,7 +69,7 @@ class AddUser extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      InkWell(
+                      GestureDetector(
                         onTap: () {
                           Get.to(ShowAllUsers());
                         },
@@ -81,7 +81,7 @@ class AddUser extends StatelessWidget {
                         ),
                       ),
                       GetBuilder<CreateUserController>(builder: (controller) {
-                        return InkWell(
+                        return GestureDetector(
                           onTap: () {
                             if (formKey.currentState!.validate()) {
                               if (controller.isUserUpdate) {

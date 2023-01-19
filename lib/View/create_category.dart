@@ -41,7 +41,7 @@ class CreateCategory extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      InkWell(
+                      GestureDetector(
                         onTap: () {
                           Get.to(ShowCategory());
                         },
@@ -53,7 +53,7 @@ class CreateCategory extends StatelessWidget {
                         ),
                       ),
                       GetBuilder<AddCategoryController>(builder: (controller) {
-                        return InkWell(
+                        return GestureDetector(
                           onTap: () {
                             if (formKey.currentState!.validate()) {
                               controller.isUpdate ? controller.edit() : controller.create();

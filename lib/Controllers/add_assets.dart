@@ -159,7 +159,7 @@ class AddAssetsController extends GetxController {
   takeAssetImage() async {
     assetsImage = null;
     var pick = await ImagePicker().pickImage(
-      source: ImageSource.camera,
+      source: ImageSource.gallery,
       imageQuality: 50,
     );
     var img = File(pick!.path);
@@ -167,5 +167,4 @@ class AddAssetsController extends GetxController {
     assetsImage = base64.encode(bytes);
     update();
   }
-
 }

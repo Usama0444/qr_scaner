@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:html' as html;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
@@ -84,6 +85,29 @@ class _ShowAllAssetsState extends State<ShowAllAssets> {
     Share.shareFiles([file.path]);
   }
 
+  void generateCSV() {
+//now convert our 2d array into the csvlist using the plugin of csv
+    String csv = const ListToCsvConverter().convert(exportAndShare);
+//this csv variable holds entire csv data
+//Now Convert or encode this csv string into utf8
+    final bytes = utf8.encode(csv);
+//NOTE THAT HERE WE USED HTML PACKAGE
+    final blob = html.Blob([bytes]);
+//It will create downloadable object
+    final url = html.Url.createObjectUrlFromBlob(blob);
+//It will create anchor to download the file
+    final anchor = html.document.createElement('a') as html.AnchorElement
+      ..href = url
+      ..style.display = 'none'
+      ..download = '${DateTime.now()}.csv';
+//finally add the csv anchor to body
+    html.document.body?.children.add(anchor);
+// Cause download by calling this function
+    anchor.click();
+//revoke the object
+    html.Url.revokeObjectUrl(url);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -99,7 +123,8 @@ class _ShowAllAssetsState extends State<ShowAllAssets> {
         floatingActionButton: GestureDetector(
           onTap: () async {
             await updateList();
-            await saveList();
+            // await saveList();
+            generateCSV();
           },
           child: MyButton(
             btnWidth: 100.w,
@@ -144,7 +169,11 @@ class _ShowAllAssetsState extends State<ShowAllAssets> {
                   ));
                   ids.add(docs[i]['id']);
                 }
-                return ListView.builder(
+                return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height / 2),
+                  ),
                   itemCount: assets.length,
                   itemBuilder: (context, index) {
                     return SizedBox(

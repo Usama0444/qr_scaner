@@ -48,10 +48,15 @@ class ShowAllUsers extends StatelessWidget {
                       password: docs[i]['password'],
                       username: docs[i]['username'],
                     ));
+
                     ids.add(docs[i]['uid']);
                   }
                 }
-                return ListView.builder(
+                return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height / 4),
+                  ),
                   itemCount: user.length,
                   itemBuilder: (context, index) {
                     return SizedBox(
@@ -84,7 +89,7 @@ class ShowAllUsers extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    InkWell(
+                                    GestureDetector(
                                       onTap: () {
                                         users.username.text = user[index].username!;
                                         users.password.text = user[index].password!;
@@ -103,7 +108,7 @@ class ShowAllUsers extends StatelessWidget {
                                     SizedBox(
                                       width: 50.w,
                                     ),
-                                    InkWell(
+                                    GestureDetector(
                                       onTap: () {
                                         print('press');
                                         users.delete(ids[index]);

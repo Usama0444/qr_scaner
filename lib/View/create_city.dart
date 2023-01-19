@@ -40,7 +40,7 @@ class CreateCity extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         Get.to(ShowCity());
                       },
@@ -52,7 +52,7 @@ class CreateCity extends StatelessWidget {
                       ),
                     ),
                     GetBuilder<AddCityController>(builder: (controller) {
-                      return InkWell(
+                      return GestureDetector(
                         onTap: () {
                           if (formKey.currentState!.validate()) {
                             controller.isUpdate ? controller.edit() : controller.create();

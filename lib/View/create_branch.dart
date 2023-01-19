@@ -41,7 +41,7 @@ class CreateBrach extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      InkWell(
+                      GestureDetector(
                         onTap: () {
                           Get.to(ShowBranches());
                         },
@@ -53,7 +53,7 @@ class CreateBrach extends StatelessWidget {
                         ),
                       ),
                       GetBuilder<AddBranchController>(builder: (controller) {
-                        return InkWell(
+                        return GestureDetector(
                           onTap: () {
                             if (formKey.currentState!.validate()) {
                               controller.isUpdate ? controller.edit() : controller.create();
